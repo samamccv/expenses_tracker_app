@@ -1,0 +1,16 @@
+android/** linguist-vendored
+ios/** linguist-vendored
+linux/** linguist-vendored
+windows/** linguist-vendored
+macos/** linguist-vendored
+web/** linguist-vendored
+build/** linguist-vendored
+
+# Ignore Flutter/Gradle/CMake caches
+**/Pods/** linguist-vendored
+**/.cxx/** linguist-vendored
+**/.gradle/** linguist-vendored
+**/CMakeFiles/** linguist-vendored
+
+# Ensure Dart files count correctly
+*.dart linguist-language=Dart
