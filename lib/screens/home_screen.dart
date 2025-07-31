@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:expenses_tracker_app/screens/add_expenses.dart';
 import 'package:expenses_tracker_app/screens/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
   late Color selectedItem = Colors.blue;
   Color unselectedItem = Colors.grey;
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 3,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home,
-              color: index == 0 ? selectedItem : unselectedItem,),
+              icon: Icon(
+                CupertinoIcons.home,
+                color: index == 0 ? selectedItem : unselectedItem,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.graph_square_fill,
-               color: index == 1 ? selectedItem : unselectedItem,),
+              icon: Icon(
+                CupertinoIcons.graph_square_fill,
+                color: index == 1 ? selectedItem : unselectedItem,
+              ),
               label: 'States',
             ),
           ],
@@ -48,7 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => const AddExpenses(),
+            ),
+          );
+        },
         shape: const CircleBorder(),
         child: Container(
           width: 60,

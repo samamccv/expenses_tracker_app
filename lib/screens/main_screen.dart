@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:expenses_tracker_app/data/%20data.dart';
-import 'package:expenses_tracker_app/expense.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
