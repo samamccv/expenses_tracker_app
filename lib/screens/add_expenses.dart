@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AddExpenses extends StatefulWidget {
   const AddExpenses({super.key});
@@ -14,6 +15,15 @@ class _AddExpensesState extends State<AddExpenses> {
   TextEditingController categoryController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
+
+  List<String> MycategoryIcons = [
+    'entirtainment',
+    'food',
+    'health',
+    'travel',
+    'shopping',
+    'others',
+  ];
 
   @override
   @override
@@ -102,59 +112,115 @@ class _AddExpensesState extends State<AddExpenses> {
                       ),
                       suffixIcon: IconButton(
                         onPressed: () {
-                          showDialog(
+                          showModalBottomSheet(
                             context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16),
+                              ),
+                            ),
                             builder: (ctx) {
-                              bool isExpenses = false;
-                              return AlertDialog(
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    TextFormField(
-                                      onTap: () {
-                                        setState(() {});
-                                      },
-                                      textAlignVertical:
-                                          TextAlignVertical.center,
-                                      readOnly: true,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        prefixIcon: Icon(
-                                          FontAwesomeIcons.ellipsis,
-                                          color: Colors.blueGrey,
-                                          size: 16,
-                                        ),
-                                        suffixIcon: Icon(
-                                          FontAwesomeIcons.chevronDown,
-                                          color: Colors.blueGrey,
-                                          size: 16,
-                                        ),
-                                        hintText: 'choose your category',
-                                        hintStyle: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontSize: 14,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(12),
-                                          ),
-                                          borderSide: BorderSide.none,
+                              return StatefulBuilder(
+                                builder: (context, setState) {
+                                  return SingleChildScrollView(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: 16,
+                                        right: 16,
+                                        top: 16,
+                                        bottom:
+                                            MediaQuery.of(
+                                              context,
+                                            ).viewInsets.bottom +
+                                            16,
+                                      ),
+                                      child: SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                            0.6,
+
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextFormField(
+                                              onTap: () {
+                                                setState(() {});
+                                              },
+                                              textAlignVertical:
+                                                  TextAlignVertical.center,
+                                              readOnly: true,
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.white,
+                                                prefixIcon: Icon(
+                                                  FontAwesomeIcons.ellipsis,
+                                                  color: Colors.blueGrey,
+                                                  size: 16,
+                                                ),
+                                                suffixIcon: Icon(
+                                                  FontAwesomeIcons.chevronDown,
+                                                  color: Colors.blueGrey,
+                                                  size: 16,
+                                                ),
+                                                hintText:
+                                                    'choose your category',
+                                                hintStyle: TextStyle(
+                                                  color: Colors.blueGrey,
+                                                  fontSize: 14,
+                                                ),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.vertical(
+                                                        top: Radius.circular(
+                                                          12,
+                                                        ),
+                                                      ),
+                                                  borderSide: BorderSide.none,
+                                                ),
+                                              ),
+                                            ),
+
+                                            Container(
+                                              width: 500,
+                                              height: 400,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                      bottom: Radius.circular(
+                                                        12,
+                                                      ),
+                                                    ),
+                                              ),
+                                              child: GridView.builder(
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 4,
+                                                    ),
+                                                itemCount:
+                                                    MycategoryIcons.length,
+                                                itemBuilder: (context, int i) {
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                          vertical: 4,
+                                                        ),
+                                                    child: SvgPicture.asset(
+                                                      'assets/svg/${MycategoryIcons[i]}.svg',
+                                                      width: 50,
+                                                      height: 40,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 200,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.vertical(
-                                          bottom: Radius.circular(12),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  );
+                                },
                               );
                             },
                           );
